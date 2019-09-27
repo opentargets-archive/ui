@@ -1,6 +1,8 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+import ExampleComponent from "ui";
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         >
           Learn React
         </a>
+        <ExampleComponent text="It worked in genetics-app!" />
       </header>
     </div>
   );
