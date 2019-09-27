@@ -5,5 +5,8 @@
     "@types/node": "^12.7.8",
     "lerna": "^3.16.4",
     "typescript": "^3.6.3"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

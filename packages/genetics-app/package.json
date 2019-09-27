@@ -1,6 +1,5 @@
 {
-  "name": "platform-app",
-  "version": "0.1.0",
+  "name": "genetics-app",
   "private": true,
   "dependencies": {
     "react": "^16.9.0",
