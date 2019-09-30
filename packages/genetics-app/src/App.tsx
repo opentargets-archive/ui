@@ -4,7 +4,9 @@ import "./App.css";
 
 import ExampleComponent from "ui";
 
-function App() {
+export type Props = { name: string };
+
+const App: React.FC<Props> = ({ name }) => {
   return (
     <div className="App">
       <header className="App-header">
@@ -20,10 +22,10 @@ function App() {
         >
           Learn React
         </a>
-        <ExampleComponent text="It worked in platform-app!" />
+        <ExampleComponent text={`It worked in ${name}!`} />
       </header>
     </div>
   );
-}
+};
 
 export default App;
