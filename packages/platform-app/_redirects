@@ -1,0 +1,2 @@
+# Redirect to ensure non-root urls still fetch index.html
+/*   /index.html   200
