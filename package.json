@@ -6,6 +6,10 @@
     "lerna": "^3.16.4",
     "typescript": "^3.6.3"
   },
+  "scripts": {
+    "build:platform-app": "lerna bootstrap && lerna link && cd packages/ui && yarn build && cd ../platform-app && yarn build && cd ../..",
+    "build:genetics-app": "lerna bootstrap && lerna link && cd packages/ui && yarn build && cd ../genetics-app && yarn build && cd ../.."
+  },
   "workspaces": [
     "packages/*"
   ]
