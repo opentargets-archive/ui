@@ -1,11 +1,9 @@
 import * as React from "react";
 
-export type Props = { text: string };
+type Props = { text: string };
 
-export default class ExampleComponent extends React.Component<Props> {
-  render() {
-    const { text } = this.props;
+const ExampleComponent: React.FC<Props> = ({ text }) => (
+  <div>Example Component: {text}</div>
+);
 
-    return <div>Example Component: {text}</div>;
-  }
-}
+export default ExampleComponent;
