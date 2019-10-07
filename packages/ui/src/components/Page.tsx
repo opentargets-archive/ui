@@ -12,13 +12,19 @@ const Page: React.FC<Props> = ({ header, footer, children }) => (
     container
     spacing={0}
     direction="column"
-    alignContent="center"
+    alignContent="stretch"
     justify="space-between"
-    style={{ width: "100%", minHeight: "100vh" }}
+    style={{ minHeight: "100vh" }}
   >
-    <Grid item>{header}</Grid>
-    <Grid item>{children}</Grid>
-    <Grid item>{footer}</Grid>
+    <Grid item xs={12}>
+      {header}
+    </Grid>
+    <Grid item xs={12}>
+      {children}
+    </Grid>
+    <Grid item xs={12}>
+      {footer}
+    </Grid>
   </Grid>
 );
 
