@@ -6,8 +6,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
-
-import "./App.css";
+import { CssBaseline } from "@material-ui/core";
 
 import { Page, Header, Footer, FontAwesomeLoader, theme } from "ui";
 
@@ -26,6 +25,7 @@ const App: React.FC = () => (
   <ApolloProvider client={client}>
     {/* theme can be overridden; see material-ui docs for detail */}
     <ThemeProvider theme={createMuiTheme(theme)}>
+      <CssBaseline />
       <FontAwesomeLoader>
         <Router>
           <Switch>
