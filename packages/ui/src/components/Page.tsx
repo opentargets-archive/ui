@@ -2,9 +2,9 @@ import * as React from "react";
 import { Grid } from "@material-ui/core";
 
 type Props = {
-  header: JSX.Element;
-  footer: JSX.Element;
-  children: JSX.Element;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+  children: React.ReactNode;
 };
 
 const Page: React.FC<Props> = ({ header, footer, children }) => (
@@ -16,15 +16,19 @@ const Page: React.FC<Props> = ({ header, footer, children }) => (
     justify="space-between"
     style={{ minHeight: "100vh" }}
   >
-    <Grid item xs={12}>
-      {header}
-    </Grid>
+    {header ? (
+      <Grid item xs={12}>
+        {header}
+      </Grid>
+    ) : null}
     <Grid item xs={12}>
       {children}
     </Grid>
-    <Grid item xs={12}>
-      {footer}
-    </Grid>
+    {footer ? (
+      <Grid item xs={12}>
+        {footer}
+      </Grid>
+    ) : null}
   </Grid>
 );
 
