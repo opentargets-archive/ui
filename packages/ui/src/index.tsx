@@ -1,4 +1,5 @@
 import "@material-ui/styles";
+import "typeface-inter";
 
 export { default as ExampleComponent } from "./components/ExampleComponent";
 export { default as Page } from "./components/Page";

@@ -5,10 +5,10 @@ const theme = {
   // shape: {
   //   borderRadius: 0,
   // },
-  // typography: {
-  //   useNextVariants: true,
-  //   fontFamily: '"Inter", "serif"',
-  // },
+  typography: {
+    useNextVariants: true,
+    fontFamily: '"Inter", "serif"',
+  },
   palette: {
     primary: {
       // light: lighten(0.2, PRIMARY),
