@@ -5,6 +5,8 @@ export { default as ExampleComponent } from "./components/ExampleComponent";
 export { default as Page } from "./components/Page";
 export { default as Header } from "./components/Header";
 export { default as Footer } from "./components/Footer";
+export { default as Section } from "./components/Section";
+export { default as SectionContainer } from "./components/SectionContainer";
 
 export { default as FontAwesomeLoader } from "./components/FontAwesomeLoader";
 export { default as theme } from "./theme";
