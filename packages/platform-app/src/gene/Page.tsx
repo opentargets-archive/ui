@@ -1,6 +1,6 @@
 import React from "react";
-import { Avatar } from "@material-ui/core";
-import { Section, SectionContainer } from "ui";
+import { Avatar, Chip } from "@material-ui/core";
+import { Section, SectionContainer, ChipContainer } from "ui";
 
 const GenePage: React.FC = () => (
   <SectionContainer>
@@ -9,7 +9,15 @@ const GenePage: React.FC = () => (
       subtitle="Some subtitle text"
       avatar={<Avatar>S1</Avatar>}
     >
-      Content
+      <ChipContainer>
+        <Chip label="NR3A1" />
+        <Chip label="Era" />
+        <Chip label="ER-alpha" />
+        <Chip label="estrogen receptor alpha" />
+        <Chip label="oestrogen receptor alpha" />
+        <Chip label="Estrogen receptor" />
+        <Chip label="Estradiol receptor" />
+      </ChipContainer>
     </Section>
     <Section
       title="Section 2"

@@ -1,14 +1,16 @@
+import { ThemeOptions } from "@material-ui/core/styles/createMuiTheme";
 import { grey } from "@material-ui/core/colors";
 
+const SPACING = 8;
 const PRIMARY = "#3489ca";
 const SECONDARY = "#ff6350";
 
-const theme = {
+const theme: ThemeOptions = {
   shape: {
     borderRadius: 0,
   },
   typography: {
-    useNextVariants: true,
+    // useNextVariants: true,
     fontFamily: '"Inter", "serif"',
   },
   palette: {
@@ -37,6 +39,11 @@ const theme = {
     MuiCard: {
       elevation: 0,
     },
+    MuiChip: {
+      variant: "outlined",
+      size: "small",
+      // color: "primary",
+    },
   },
   overrides: {
     //   MuiButton: {
@@ -53,6 +60,11 @@ const theme = {
     MuiCard: {
       root: {
         border: `1px solid ${grey[300]}`,
+      },
+    },
+    MuiChip: {
+      root: {
+        margin: `${SPACING / 4}px`,
       },
     },
     MuiCardHeader: {

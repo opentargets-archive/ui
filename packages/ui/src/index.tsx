@@ -7,6 +7,7 @@ export { default as Header } from "./components/Header";
 export { default as Footer } from "./components/Footer";
 export { default as Section } from "./components/Section";
 export { default as SectionContainer } from "./components/SectionContainer";
+export { default as ChipContainer } from "./components/ChipContainer";
 
 export { default as FontAwesomeLoader } from "./components/FontAwesomeLoader";
 export { default as theme } from "./theme";
