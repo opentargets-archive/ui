@@ -8,7 +8,14 @@ import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 
-import { Page, Header, Footer, FontAwesomeLoader, theme } from "ui";
+import {
+  Page,
+  Header,
+  Footer,
+  SearchInput,
+  FontAwesomeLoader,
+  theme,
+} from "ui";
 
 import HomePage from "./home/Page";
 import GenePage from "./gene/Page";
@@ -38,7 +45,9 @@ const App: React.FC = () => (
 
             {/* all other pages show header/footer */}
             <Page
-              header={<Header platformName="Platform" />}
+              header={
+                <Header platformName="Platform" search={<SearchInput />} />
+              }
               footer={<Footer version="0.0.0" />}
             >
               <Route path="/gene/:ensgId">
