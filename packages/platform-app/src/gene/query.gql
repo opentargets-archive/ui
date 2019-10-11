@@ -1,0 +1,10 @@
+query TargetQuery($ensgId: String!) {
+  target(ensgId: $ensgId) {
+    id
+    name
+    uniprotId
+    symbol
+    description
+    synonyms
+  }
+}
