@@ -1,0 +1,9 @@
+overwrite: true
+schema: ${REACT_APP_PLATFORM_API_URL:"https://platform-api.now.sh/graphql"}
+documents: "src/**/*.gql"
+generates:
+  src/generated/platform-api-types.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"

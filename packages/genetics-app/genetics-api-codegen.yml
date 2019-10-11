@@ -1,0 +1,9 @@
+overwrite: true
+schema: ${REACT_APP_GENETICS_API_URL:"https://genetics-api.opentargets.io/graphql"}
+documents: "src/**/*.gql"
+generates:
+  src/generated/genetics-api-types.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
