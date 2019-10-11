@@ -1,0 +1,26 @@
+query GenePageAssociatedStudiesQuery($geneId: String!) {
+  studiesAndLeadVariantsForGene(geneId: $geneId) {
+    indexVariant {
+      rsId
+      id
+    }
+    study {
+      studyId
+      traitReported
+      pubAuthor
+      pubDate
+      pmid
+      nInitial
+      nReplication
+      nCases
+    }
+    pval
+    oddsRatio
+    oddsRatioCILower
+    oddsRatioCIUpper
+    beta
+    betaCILower
+    betaCIUpper
+    direction
+  }
+}

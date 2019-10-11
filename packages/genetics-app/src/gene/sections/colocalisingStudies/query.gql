@@ -1,0 +1,25 @@
+query GenePageColocalisingStudiesQuery($ensgId: String!) {
+  colocalisationsForGene(geneId: $ensgId) {
+    leftVariant {
+      id
+      rsId
+    }
+    study {
+      studyId
+      traitReported
+      pubAuthor
+      pubDate
+      pmid
+      hasSumsStats
+    }
+    qtlStudyId
+    phenotypeId
+    tissue {
+      id
+      name
+    }
+    h3
+    h4
+    log2h4h3
+  }
+}
