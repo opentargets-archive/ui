@@ -9,6 +9,7 @@ export { default as Section } from "./components/Section";
 export { default as SectionContainer } from "./components/SectionContainer";
 export { default as ChipContainer } from "./components/ChipContainer";
 export { default as InfoTooltip } from "./components/InfoTooltip";
+export { default as SearchInput } from "./components/SearchInput";
 
 export { default as FontAwesomeLoader } from "./components/FontAwesomeLoader";
 export { default as theme } from "./theme";
