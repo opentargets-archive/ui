@@ -5,14 +5,14 @@ import {
   TableCell,
 } from "@material-ui/core";
 
-interface Column {
+export interface TableBodyColumn {
   id: string;
   label: string;
   renderCell?: (...args: any[]) => React.ReactNode;
 }
 
 type TableBodyProps = {
-  columns: (Column)[];
+  columns: (TableBodyColumn)[];
   rows: {}[];
 };
 

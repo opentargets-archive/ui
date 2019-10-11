@@ -44,6 +44,12 @@ const theme: ThemeOptions = {
       size: "small",
       // color: "primary",
     },
+    MuiTable: {
+      size: "small",
+    },
+    MuiIconButton: {
+      size: "small",
+    },
   },
   overrides: {
     //   MuiButton: {
@@ -72,23 +78,23 @@ const theme: ThemeOptions = {
         borderBottom: `1px solid ${grey[300]}`,
       },
     },
-    //   MuiIconButton: {
-    //     root: {
-    //       width: '32px',
-    //       height: '32px',
-    //       padding: '0px',
-    //     },
+    // MuiIconButton: {
+    //   root: {
+    //     width: "32px",
+    //     height: "32px",
+    //     padding: "0px",
     //   },
-    //   MuiTablePagination: {
-    //     root: {
-    //       height: '36px',
-    //       minHeight: '36px',
-    //     },
-    //     toolbar: {
-    //       height: '36px',
-    //       minHeight: '36px',
-    //     },
-    //   },
+    // },
+    MuiTablePagination: {
+      root: {
+        height: "36px",
+        minHeight: "36px",
+      },
+      toolbar: {
+        height: "36px",
+        minHeight: "36px",
+      },
+    },
     //   MuiTabs: {
     //     root: {
     //       borderBottom: '1px solid #616161',
