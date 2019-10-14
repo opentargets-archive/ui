@@ -6,15 +6,17 @@ import TableBody, { TableBodyColumn } from "./TableBody";
 import TableClientSidePagination from "./TableClientSidePagination";
 import useClientSidePagination from "../hooks/useClientSidePagination";
 
-type TableClientSideProps = {
-  columns: TableBodyColumn[];
-  rows: {}[];
+export type TableClientSideProps<R extends {}> = {
+  columns: TableBodyColumn<R>[];
+  rows: R[];
 };
 
-const TableClientSide: React.FC<TableClientSideProps> = ({ columns, rows }) => {
+const TableClientSide: <T extends {}>(
+  props: TableClientSideProps<T>
+) => React.ReactElement | null = ({ columns, rows }) => {
   const {
     rowsOnPage,
-    tableClientSidePaginationProps,
+    tableClientSidePaginationProps
   } = useClientSidePagination(rows);
   return (
     <React.Fragment>

@@ -6,9 +6,9 @@ import { TableClientSide } from "ui";
 
 import {
   GenePageAssociatedStudiesQueryQuery,
-  GenePageAssociatedStudiesQueryQueryVariables,
-  StudiesAndLeadVariantsForGene,
+  GenePageAssociatedStudiesQueryQueryVariables
 } from "../../../generated/genetics-api-types";
+import { TableBodyColumn } from "ui/dist/components/TableBody";
 
 const QUERY = loader("./query.gql");
 
@@ -16,13 +16,17 @@ type Props = {
   geneId: string;
 };
 
-const columns = [
+type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
+
+type Rs = GenePageAssociatedStudiesQueryQuery["studiesAndLeadVariantsForGene"];
+type R = ArrayElement<Rs>;
+
+const columns: TableBodyColumn<R>[] = [
   {
     id: "study.studyId",
     label: "Study ID",
     // comparator: generateComparator(d => d.study.studyId),
-    renderCell: (rowData: StudiesAndLeadVariantsForGene) =>
-      rowData.study.studyId,
+    renderCell: d => d.study.studyId
     //   <Link to={`/study/${rowData.study.studyId}`}>
     //     {rowData.study.studyId}
     //   </Link>
@@ -31,8 +35,7 @@ const columns = [
     id: "study.traitReported",
     label: "Trait",
     // comparator: generateComparator(d => d.study.traitReported),
-    renderCell: (rowData: StudiesAndLeadVariantsForGene) =>
-      rowData.study.traitReported,
+    renderCell: d => d.study.traitReported
     // renderFilter: () => (
     //   <Autocomplete
     //     options={traitFilterOptions}
@@ -42,7 +45,7 @@ const columns = [
     //     multiple
     //   />
     // ),
-  },
+  }
   //   {
   //     id: 'study.pmid',
   //     label: 'PMID',
