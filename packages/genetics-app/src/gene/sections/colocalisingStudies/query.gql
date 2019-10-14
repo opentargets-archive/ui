@@ -1,5 +1,5 @@
-query GenePageColocalisingStudiesQuery($ensgId: String!) {
-  colocalisationsForGene(geneId: $ensgId) {
+query GenePageColocalisingStudiesQuery($geneId: String!) {
+  colocalisationsForGene(geneId: $geneId) {
     leftVariant {
       id
       rsId
