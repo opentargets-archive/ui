@@ -11,6 +11,7 @@ export { default as ChipContainer } from "./components/ChipContainer";
 export { default as InfoTooltip } from "./components/InfoTooltip";
 export { default as SearchInput } from "./components/SearchInput";
 export { default as TableClientSide } from "./components/TableClientSide";
+export { default as Link } from "./components/Link";
 
 export { default as FontAwesomeLoader } from "./components/FontAwesomeLoader";
 export { default as theme } from "./theme";

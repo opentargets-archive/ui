@@ -50,6 +50,9 @@ const theme: ThemeOptions = {
     MuiIconButton: {
       size: "small",
     },
+    MuiLink: {
+      underline: "none",
+    },
   },
   overrides: {
     //   MuiButton: {
