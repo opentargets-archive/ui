@@ -2,7 +2,7 @@ import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 
-import { TableClientSide } from "ui";
+import { TableClientSide, Link } from "ui";
 
 import {
   GenePageColocalisingStudiesQueryQuery,
@@ -21,11 +21,10 @@ const columns = [
     id: "study",
     label: "Study",
     // comparator: (a, b) => d3.ascending(a.study.studyId, b.study.studyId),
-    renderCell: (d: GwasColocalisationForQtlWithGene) =>
-      // (
-      d.study.studyId,
-    //   <Link to={`/study/${d.study.studyId}`}>{d.study.studyId}</Link>
-    // ),
+    renderCell: (d: GwasColocalisationForQtlWithGene) => (
+      // d.study.studyId,
+      <Link to={`/study/${d.study.studyId}`}>{d.study.studyId}</Link>
+    ),
   },
   {
     id: "traitReported",

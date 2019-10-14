@@ -2,7 +2,7 @@ import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 
-import { TableClientSide } from "ui";
+import { TableClientSide, Link } from "ui";
 
 import {
   GenePageAssociatedStudiesQueryQuery,
@@ -21,18 +21,16 @@ const columns = [
     id: "study.studyId",
     label: "Study ID",
     // comparator: generateComparator(d => d.study.studyId),
-    renderCell: (rowData: StudiesAndLeadVariantsForGene) =>
-      rowData.study.studyId,
-    //   <Link to={`/study/${rowData.study.studyId}`}>
-    //     {rowData.study.studyId}
-    //   </Link>
+    renderCell: (d: StudiesAndLeadVariantsForGene) => (
+      // rowData.study.studyId,
+      <Link to={`/study/${d.study.studyId}`}>{d.study.studyId}</Link>
+    ),
   },
   {
     id: "study.traitReported",
     label: "Trait",
     // comparator: generateComparator(d => d.study.traitReported),
-    renderCell: (rowData: StudiesAndLeadVariantsForGene) =>
-      rowData.study.traitReported,
+    renderCell: (d: StudiesAndLeadVariantsForGene) => d.study.traitReported,
     // renderFilter: () => (
     //   <Autocomplete
     //     options={traitFilterOptions}
@@ -86,22 +84,20 @@ const columns = [
   //     renderCell: rowData =>
   //       rowData.study.nCases ? commaSeparate(rowData.study.nCases) : '',
   //   },
-  //   {
-  //     id: 'indexVariant.id',
-  //     label: 'Lead Variant',
-  //     comparator: generateComparator(d => d.indexVariant.id),
-  //     renderCell: rowData => (
-  //       <Link to={`/variant/${rowData.indexVariant.id}`}>
-  //         {rowData.indexVariant.id}
-  //       </Link>
-  //     ),
-  //   },
-  //   {
-  //     id: 'indexVariant.rsId',
-  //     label: 'Lead Variant rsID',
-  //     comparator: generateComparator(d => d.indexVariant.rsId),
-  //     renderCell: rowData => rowData.indexVariant.rsId,
-  //   },
+  {
+    id: "indexVariant.id",
+    label: "Lead Variant",
+    // comparator: generateComparator(d => d.indexVariant.id),
+    renderCell: (d: StudiesAndLeadVariantsForGene) => (
+      <Link to={`/variant/${d.indexVariant.id}`}>{d.indexVariant.id}</Link>
+    ),
+  },
+  {
+    id: "indexVariant.rsId",
+    label: "Lead Variant rsID",
+    // comparator: generateComparator(d => d.indexVariant.rsId),
+    renderCell: (d: StudiesAndLeadVariantsForGene) => d.indexVariant.rsId,
+  },
   //   {
   //     id: 'pval',
   //     label: 'P-value',
