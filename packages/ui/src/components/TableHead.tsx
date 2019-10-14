@@ -9,31 +9,30 @@ import {
 } from "@material-ui/core";
 import { Help } from "@material-ui/icons";
 
-type Column = {
+export interface TableHeadColumn {
   id: string;
   label: string;
-  isSortable: boolean;
+  isSortable?: boolean;
   tooltip?: React.ReactElement;
-  renderCell?: (...args: any[]) => React.ReactElement;
-};
+}
 
-type ColumnGroup = {
-  id: string;
-  label: string;
-  colspan: number;
-};
+// type ColumnGroup = {
+//   id: string;
+//   label: string;
+//   colspan: number;
+// };
 
-type ColumnFilter = {};
+// type ColumnFilter = {};
 
-type SortBy = {
+export type SortBy = {
   columnId: string;
   direction: "asc" | "desc";
 };
 
-type TableHeadProps = {
-  columnGroups?: ColumnGroup[];
-  columns: Column[];
-  columnFilters?: ColumnFilter[];
+export type TableHeadProps = {
+  // columnGroups?: ColumnGroup[];
+  columns: TableHeadColumn[];
+  // columnFilters?: ColumnFilter[];
   sortBy?: SortBy;
 };
 
@@ -43,7 +42,7 @@ const TableHead: React.FC<TableHeadProps> = ({ columns, sortBy }) => (
     <TableRow>
       {columns.map((column, columnIndex) => (
         <TableCell key={columnIndex}>
-          {sortBy && column.isSortable !== false ? (
+          {sortBy && column.isSortable ? (
             <TableSortLabel
               active={column.id === sortBy.columnId}
               direction={sortBy.direction}

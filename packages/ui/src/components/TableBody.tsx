@@ -11,7 +11,7 @@ export interface TableBodyColumn {
   renderCell?: (...args: any[]) => React.ReactNode;
 }
 
-type TableBodyProps = {
+export type TableBodyProps = {
   columns: (TableBodyColumn)[];
   rows: {}[];
 };
