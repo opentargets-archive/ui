@@ -2,13 +2,19 @@ import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 
-import { TableClientSide, Link, getComparator, getArrayElementType } from "ui";
+import {
+  TableClientSide,
+  TableClientSideColumn,
+  Link,
+  getComparator,
+  getArrayElementType,
+} from "ui";
 
 import {
   GenePageColocalisingStudiesQueryQuery,
   GenePageColocalisingStudiesQueryQueryVariables,
 } from "../../../generated/genetics-api-types";
-import { TableClientSideColumn } from "ui/dist/components/TableClientSide";
+// import { TableClientSideColumn } from "ui/dist/components/TableClientSide";
 
 const QUERY = loader("./query.gql");
 
