@@ -14,7 +14,6 @@ import {
   GenePageColocalisingStudiesQueryQuery,
   GenePageColocalisingStudiesQueryQueryVariables,
 } from "../../../generated/genetics-api-types";
-// import { TableClientSideColumn } from "ui/dist/components/TableClientSide";
 
 const QUERY = loader("./query.gql");
 
