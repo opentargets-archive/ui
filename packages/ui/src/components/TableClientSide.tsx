@@ -9,6 +9,7 @@ import useClientSidePagination from "../hooks/useClientSidePagination";
 import useClientSideSorting, {
   TableClientSideColumn,
 } from "../hooks/useClientSideSorting";
+import useClientSideFiltering from "../hooks/useClientSideFiltering";
 
 export type TableClientSideProps<R extends {}> = {
   columns: (TableClientSideColumn<R>)[];
@@ -18,13 +19,13 @@ export type TableClientSideProps<R extends {}> = {
 const TableClientSide: <T extends {}>(
   props: TableClientSideProps<T>
 ) => React.ReactElement | null = ({ columns, rows }) => {
-  // const { filteredRows, filters, } = useClientSideFiltering(
-  //   rows,
-  //   columns
-  // )
-  const { sortedRows, columnsWithSorting } = useClientSideSorting(
+  const { filteredRows, columnsWithFiltering } = useClientSideFiltering(
     rows,
     columns
+  );
+  const { sortedRows, columnsWithSorting } = useClientSideSorting(
+    filteredRows,
+    columnsWithFiltering
   );
   const {
     rowsOnPage,
