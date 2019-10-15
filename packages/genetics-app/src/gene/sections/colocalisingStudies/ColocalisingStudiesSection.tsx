@@ -7,8 +7,8 @@ import { TableClientSide, Link } from "ui";
 import {
   GenePageColocalisingStudiesQueryQuery,
   GenePageColocalisingStudiesQueryQueryVariables,
-  GwasColocalisationForQtlWithGene,
 } from "../../../generated/genetics-api-types";
+import { TableBodyColumn } from "ui/dist/components/TableBody";
 
 const QUERY = loader("./query.gql");
 
@@ -16,12 +16,17 @@ type Props = {
   geneId: string;
 };
 
-const columns = [
+type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
+
+type Rs = GenePageColocalisingStudiesQueryQuery["colocalisationsForGene"];
+type R = ArrayElement<Rs>;
+
+const columns: TableBodyColumn<R>[] = [
   {
     id: "study",
     label: "Study",
     // comparator: (a, b) => d3.ascending(a.study.studyId, b.study.studyId),
-    renderCell: (d: GwasColocalisationForQtlWithGene) => (
+    renderCell: d => (
       // d.study.studyId,
       <Link to={`/study/${d.study.studyId}`}>{d.study.studyId}</Link>
     ),
@@ -31,7 +36,7 @@ const columns = [
     label: "Trait reported",
     // comparator: (a, b) =>
     //   d3.ascending(a.study.traitReported, b.study.traitReported),
-    renderCell: (d: GwasColocalisationForQtlWithGene) => d.study.traitReported,
+    renderCell: d => d.study.traitReported,
     // renderFilter: () => (
     //   <Autocomplete
     //     options={colocTraitFilterOptions}

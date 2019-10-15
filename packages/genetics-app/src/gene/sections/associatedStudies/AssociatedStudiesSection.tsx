@@ -7,8 +7,8 @@ import { TableClientSide, Link } from "ui";
 import {
   GenePageAssociatedStudiesQueryQuery,
   GenePageAssociatedStudiesQueryQueryVariables,
-  StudiesAndLeadVariantsForGene,
 } from "../../../generated/genetics-api-types";
+import { TableBodyColumn } from "ui/dist/components/TableBody";
 
 const QUERY = loader("./query.gql");
 
@@ -16,12 +16,17 @@ type Props = {
   geneId: string;
 };
 
-const columns = [
+type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
+
+type Rs = GenePageAssociatedStudiesQueryQuery["studiesAndLeadVariantsForGene"];
+type R = ArrayElement<Rs>;
+
+const columns: TableBodyColumn<R>[] = [
   {
     id: "study.studyId",
     label: "Study ID",
     // comparator: generateComparator(d => d.study.studyId),
-    renderCell: (d: StudiesAndLeadVariantsForGene) => (
+    renderCell: d => (
       // rowData.study.studyId,
       <Link to={`/study/${d.study.studyId}`}>{d.study.studyId}</Link>
     ),
@@ -30,7 +35,7 @@ const columns = [
     id: "study.traitReported",
     label: "Trait",
     // comparator: generateComparator(d => d.study.traitReported),
-    renderCell: (d: StudiesAndLeadVariantsForGene) => d.study.traitReported,
+    renderCell: d => d.study.traitReported,
     // renderFilter: () => (
     //   <Autocomplete
     //     options={traitFilterOptions}
@@ -88,16 +93,16 @@ const columns = [
     id: "indexVariant.id",
     label: "Lead Variant",
     // comparator: generateComparator(d => d.indexVariant.id),
-    renderCell: (d: StudiesAndLeadVariantsForGene) => (
+    renderCell: d => (
       <Link to={`/variant/${d.indexVariant.id}`}>{d.indexVariant.id}</Link>
     ),
   },
-  {
-    id: "indexVariant.rsId",
-    label: "Lead Variant rsID",
-    // comparator: generateComparator(d => d.indexVariant.rsId),
-    renderCell: (d: StudiesAndLeadVariantsForGene) => d.indexVariant.rsId,
-  },
+  // {
+  //   id: "indexVariant.rsId",
+  //   label: "Lead Variant rsID",
+  //   // comparator: generateComparator(d => d.indexVariant.rsId),
+  //   renderCell: d => d.indexVariant.rsId,
+  // },
   //   {
   //     id: 'pval',
   //     label: 'P-value',

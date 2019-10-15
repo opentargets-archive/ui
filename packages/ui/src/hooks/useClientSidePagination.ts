@@ -1,6 +1,9 @@
 import { useState } from "react";
 
-const useClientSidePagination = (rows: {}[], pageSize: number = 10) => {
+const useClientSidePagination = <R extends {}>(
+  rows: R[],
+  pageSize: number = 10
+) => {
   const [page, setPage] = useState(0);
 
   const totalRows = rows.length;
@@ -12,7 +15,7 @@ const useClientSidePagination = (rows: {}[], pageSize: number = 10) => {
     pageSize,
     page,
     totalPages,
-    setPage,
+    setPage
   };
 
   return { rowsOnPage, tableClientSidePaginationProps };

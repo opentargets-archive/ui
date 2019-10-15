@@ -5,18 +5,20 @@ import {
   TableCell,
 } from "@material-ui/core";
 
-export interface TableBodyColumn {
+export type TableBodyColumn<R extends {}> = {
   id: string;
   label: string;
-  renderCell?: (...args: any[]) => React.ReactNode;
-}
-
-export type TableBodyProps = {
-  columns: (TableBodyColumn)[];
-  rows: {}[];
+  renderCell?: (d: R) => React.ReactElement | string | null;
 };
 
-const TableBody: React.FC<TableBodyProps> = ({ columns, rows }) => (
+export type TableBodyProps<R extends {}> = {
+  columns: (TableBodyColumn<R>)[];
+  rows: R[];
+};
+
+const TableBody: <T extends {}>(
+  props: TableBodyProps<T>
+) => React.ReactElement | null = ({ columns, rows }) => (
   <MuiTableBody>
     {rows.map((row, rowIndex) => (
       <TableRow key={rowIndex}>
