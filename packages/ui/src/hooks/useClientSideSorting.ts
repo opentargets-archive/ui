@@ -60,9 +60,11 @@ const useClientSideSorting = <R extends {}>(
     sortedRows = rows;
   }
 
-  const columnsWithSortHandlers = columns.map(c => {
+  const columnsWithSorting = columns.map(c => {
     const columnId = c.id;
     if (isSortableColumn(c)) {
+      const active = sortBy && c.id === sortBy.columnId;
+      const direction = sortBy && sortBy.direction;
       const handleColumnClick = () => {
         const direction =
           sortBy && columnId === sortBy.columnId && sortBy.direction === "desc"
@@ -70,7 +72,7 @@ const useClientSideSorting = <R extends {}>(
             : "desc";
         setSortBy({ columnId, direction });
       };
-      return { ...c, isSortable: true, handleColumnClick };
+      return { ...c, isSortable: true, active, direction, handleColumnClick };
     } else {
       return { ...c, isSortable: false };
     }
@@ -78,8 +80,7 @@ const useClientSideSorting = <R extends {}>(
 
   return {
     sortedRows,
-    sortBy,
-    columnsWithSortHandlers,
+    columnsWithSorting,
   };
 };
 

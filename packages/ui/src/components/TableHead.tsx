@@ -15,6 +15,8 @@ export type TableHeadColumn = {
   id: string;
   label: string;
   isSortable?: boolean;
+  active?: boolean;
+  direction?: "asc" | "desc";
   handleColumnClick?: () => void;
   tooltip?: React.ReactElement;
 };
@@ -34,7 +36,7 @@ export type TableHeadProps = {
   sortBy?: SortBy;
 };
 
-const TableHead: React.FC<TableHeadProps> = ({ columns, sortBy }) => (
+const TableHead: React.FC<TableHeadProps> = ({ columns }) => (
   <MuiTableHead>
     {/* TODO: add columnGroups rendering */}
     <TableRow>
@@ -42,8 +44,8 @@ const TableHead: React.FC<TableHeadProps> = ({ columns, sortBy }) => (
         <TableCell key={columnIndex}>
           {column.isSortable ? (
             <TableSortLabel
-              active={sortBy && column.id === sortBy.columnId}
-              direction={sortBy && sortBy.direction}
+              active={column.active}
+              direction={column.direction}
               onClick={column.handleColumnClick}
             >
               {column.tooltip ? (

@@ -18,7 +18,11 @@ export type TableClientSideProps<R extends {}> = {
 const TableClientSide: <T extends {}>(
   props: TableClientSideProps<T>
 ) => React.ReactElement | null = ({ columns, rows }) => {
-  const { sortedRows, sortBy, columnsWithSortHandlers } = useClientSideSorting(
+  // const { filteredRows, filters, } = useClientSideFiltering(
+  //   rows,
+  //   columns
+  // )
+  const { sortedRows, columnsWithSorting } = useClientSideSorting(
     rows,
     columns
   );
@@ -29,7 +33,7 @@ const TableClientSide: <T extends {}>(
   return (
     <React.Fragment>
       <MuiTable>
-        <TableHead {...{ columns: columnsWithSortHandlers, sortBy }} />
+        <TableHead {...{ columns: columnsWithSorting }} />
         <TableBody columns={columns} rows={rowsOnPage} />
       </MuiTable>
       <Box justifyContent="flex-end">
