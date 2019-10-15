@@ -2,7 +2,7 @@ import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 
-import { TableClientSide, Link, getComparator } from "ui";
+import { TableClientSide, Link, getComparator, getArrayElementType } from "ui";
 
 import {
   GenePageAssociatedStudiesQueryQuery,
@@ -16,10 +16,9 @@ type Props = {
   geneId: string;
 };
 
-type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
-
-type Rs = GenePageAssociatedStudiesQueryQuery["studiesAndLeadVariantsForGene"];
-type R = ArrayElement<Rs>;
+type R = getArrayElementType<
+  GenePageAssociatedStudiesQueryQuery["studiesAndLeadVariantsForGene"]
+>;
 
 const columns: TableClientSideColumn<R>[] = [
   {

@@ -17,3 +17,4 @@ export { default as FontAwesomeLoader } from "./components/FontAwesomeLoader";
 export { default as theme } from "./theme";
 
 export { default as getComparator } from "./utils/getComparator";
+export { getArrayElementType } from "./utils/getArrayElementType";
