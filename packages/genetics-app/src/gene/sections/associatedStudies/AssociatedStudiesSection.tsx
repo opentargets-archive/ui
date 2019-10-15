@@ -180,13 +180,7 @@ const AssociatedStudiesSection: React.FC<Props> = ({ geneId }) => {
   const rows =
     error || loading || !data ? [] : data.studiesAndLeadVariantsForGene;
 
-  return (
-    <div>
-      {geneId}
-
-      <TableClientSide {...{ columns, rows }} />
-    </div>
-  );
+  return <TableClientSide {...{ columns, rows }} />;
 };
 
 export default AssociatedStudiesSection;

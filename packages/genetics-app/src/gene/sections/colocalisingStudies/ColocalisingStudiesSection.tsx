@@ -118,13 +118,7 @@ const ColocalisingStudiesSection: React.FC<Props> = ({ geneId }) => {
 
   const rows = error || loading || !data ? [] : data.colocalisationsForGene;
 
-  return (
-    <div>
-      {geneId}
-
-      <TableClientSide {...{ columns, rows }} />
-    </div>
-  );
+  return <TableClientSide {...{ columns, rows }} />;
 };
 
 export default ColocalisingStudiesSection;
