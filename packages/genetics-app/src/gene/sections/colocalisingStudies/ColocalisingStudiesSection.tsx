@@ -2,13 +2,13 @@ import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 
-import { TableClientSide, Link } from "ui";
+import { TableClientSide, Link, getComparator } from "ui";
 
 import {
   GenePageColocalisingStudiesQueryQuery,
   GenePageColocalisingStudiesQueryQueryVariables,
 } from "../../../generated/genetics-api-types";
-import { TableBodyColumn } from "ui/dist/components/TableBody";
+import { TableClientSideColumn } from "ui/dist/components/TableClientSide";
 
 const QUERY = loader("./query.gql");
 
@@ -21,21 +21,19 @@ type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
 type Rs = GenePageColocalisingStudiesQueryQuery["colocalisationsForGene"];
 type R = ArrayElement<Rs>;
 
-const columns: TableBodyColumn<R>[] = [
+const columns: TableClientSideColumn<R>[] = [
   {
     id: "study",
     label: "Study",
-    // comparator: (a, b) => d3.ascending(a.study.studyId, b.study.studyId),
+    comparator: getComparator(d => d.study.studyId),
     renderCell: d => (
-      // d.study.studyId,
       <Link to={`/study/${d.study.studyId}`}>{d.study.studyId}</Link>
     ),
   },
   {
     id: "traitReported",
     label: "Trait reported",
-    // comparator: (a, b) =>
-    //   d3.ascending(a.study.traitReported, b.study.traitReported),
+    comparator: getComparator(d => d.study.traitReported),
     renderCell: d => d.study.traitReported,
     // renderFilter: () => (
     //   <Autocomplete
@@ -47,34 +45,34 @@ const columns: TableBodyColumn<R>[] = [
     //   />
     // ),
   },
-  //   {
-  //     id: 'pubAuthor',
-  //     label: 'Author',
-  //     comparator: (a, b) => d3.ascending(a.study.pubAuthor, b.study.pubAuthor),
-  //     renderCell: d => d.study.pubAuthor,
-  //   },
-  //   {
-  //     id: 'indexVariant',
-  //     label: 'Lead variant',
-  //     comparator: (a, b) => d3.ascending(a.leftVariant.id, b.leftVariant.id),
-  //     renderCell: d => (
-  //       <Link to={`/variant/${d.leftVariant.id}`}>{d.leftVariant.id}</Link>
-  //     ),
-  //   },
-  //   {
-  //     id: 'phenotypeId',
-  //     label: 'Phenotype',
-  //   },
-  //   {
-  //     id: 'tissue.name',
-  //     label: 'Tissue',
-  //     comparator: (a, b) => d3.ascending(a.tissue.name, b.tissue.name),
-  //     renderCell: d => d.tissue.name,
-  //   },
-  //   {
-  //     id: 'qtlStudyId',
-  //     label: 'Source',
-  //   },
+  // {
+  //   id: 'pubAuthor',
+  //   label: 'Author',
+  //   comparator: getComparator(d => d.study.pubAuthor), //(a, b) => d3.ascending(a.study.pubAuthor, b.study.pubAuthor),
+  //   renderCell: d => d.study.pubAuthor,
+  // },
+  {
+    id: "indexVariant",
+    label: "Lead variant",
+    comparator: getComparator(d => d.leftVariant.id),
+    renderCell: d => (
+      <Link to={`/variant/${d.leftVariant.id}`}>{d.leftVariant.id}</Link>
+    ),
+  },
+  {
+    id: "phenotypeId",
+    label: "Phenotype",
+  },
+  {
+    id: "tissue.name",
+    label: "Tissue",
+    comparator: getComparator(d => d.tissue.name),
+    renderCell: d => d.tissue.name,
+  },
+  {
+    id: "qtlStudyId",
+    label: "Source",
+  },
   //   // {
   //   //   id: 'beta',
   //   //   label: 'QTL beta',
