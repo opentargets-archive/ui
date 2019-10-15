@@ -9,12 +9,15 @@ import {
 } from "@material-ui/core";
 import { Help } from "@material-ui/icons";
 
-export interface TableHeadColumn {
+import { SortBy } from "../hooks/useClientSideSorting";
+
+export type TableHeadColumn = {
   id: string;
   label: string;
   isSortable?: boolean;
+  handleColumnClick?: () => void;
   tooltip?: React.ReactElement;
-}
+};
 
 // type ColumnGroup = {
 //   id: string;
@@ -23,11 +26,6 @@ export interface TableHeadColumn {
 // };
 
 // type ColumnFilter = {};
-
-export type SortBy = {
-  columnId: string;
-  direction: "asc" | "desc";
-};
 
 export type TableHeadProps = {
   // columnGroups?: ColumnGroup[];
@@ -46,7 +44,7 @@ const TableHead: React.FC<TableHeadProps> = ({ columns, sortBy }) => (
             <TableSortLabel
               active={column.id === sortBy.columnId}
               direction={sortBy.direction}
-              // onClick={this.selectSortColumn.bind(null, column.id)}
+              onClick={column.handleColumnClick}
             >
               {column.tooltip ? (
                 <Badge
