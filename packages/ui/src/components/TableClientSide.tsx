@@ -10,20 +10,26 @@ import useClientSideSorting, {
   TableColumnSortable,
 } from "../hooks/useClientSideSorting";
 
-export type TableClientSideColumn<R extends {}> = TableBodyColumn<R> &
+export type TableClientSideColumnUnsortable<R extends {}> = TableBodyColumn<R> &
   TableHeadColumn;
 
+export type TableClientSideColumnSortable<
+  R extends {}
+> = TableClientSideColumnUnsortable<R> & TableColumnSortable<R>;
+
+export type TableClientSideColumn<R extends {}> =
+  | TableClientSideColumnUnsortable<R>
+  | TableClientSideColumnSortable<R>;
+
 export type TableClientSideProps<R extends {}> = {
-  columns: (
-    | TableClientSideColumn<R>
-    | (TableClientSideColumn<R> & TableColumnSortable<R>))[];
+  columns: (TableClientSideColumn<R>)[];
   rows: R[];
 };
 
 function isSortableColumn<R extends {}>(
-  arg: any
-): arg is TableClientSideColumn<R> & TableColumnSortable<R> {
-  return arg.comparator !== undefined;
+  arg: TableClientSideColumn<R>
+): arg is TableClientSideColumnSortable<R> {
+  return arg.hasOwnProperty("comparator");
 }
 
 const TableClientSide: <T extends {}>(

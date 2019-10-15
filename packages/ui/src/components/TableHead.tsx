@@ -40,10 +40,10 @@ const TableHead: React.FC<TableHeadProps> = ({ columns, sortBy }) => (
     <TableRow>
       {columns.map((column, columnIndex) => (
         <TableCell key={columnIndex}>
-          {sortBy && column.isSortable ? (
+          {column.isSortable ? (
             <TableSortLabel
-              active={column.id === sortBy.columnId}
-              direction={sortBy.direction}
+              active={sortBy && column.id === sortBy.columnId}
+              direction={sortBy && sortBy.direction}
               onClick={column.handleColumnClick}
             >
               {column.tooltip ? (

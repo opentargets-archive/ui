@@ -2,13 +2,13 @@ import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 
-import { TableClientSide, Link } from "ui";
+import { TableClientSide, Link, getComparator } from "ui";
 
 import {
   GenePageAssociatedStudiesQueryQuery,
   GenePageAssociatedStudiesQueryQueryVariables,
 } from "../../../generated/genetics-api-types";
-import { TableBodyColumn } from "ui/dist/components/TableBody";
+import { TableClientSideColumn } from "ui/dist/components/TableClientSide";
 
 const QUERY = loader("./query.gql");
 
@@ -21,20 +21,19 @@ type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
 type Rs = GenePageAssociatedStudiesQueryQuery["studiesAndLeadVariantsForGene"];
 type R = ArrayElement<Rs>;
 
-const columns: TableBodyColumn<R>[] = [
+const columns: TableClientSideColumn<R>[] = [
   {
     id: "study.studyId",
     label: "Study ID",
-    // comparator: generateComparator(d => d.study.studyId),
+    comparator: getComparator(d => d.study.studyId),
     renderCell: d => (
-      // rowData.study.studyId,
       <Link to={`/study/${d.study.studyId}`}>{d.study.studyId}</Link>
     ),
   },
   {
     id: "study.traitReported",
     label: "Trait",
-    // comparator: generateComparator(d => d.study.traitReported),
+    comparator: getComparator(d => d.study.traitReported),
     renderCell: d => d.study.traitReported,
     // renderFilter: () => (
     //   <Autocomplete
@@ -92,7 +91,7 @@ const columns: TableBodyColumn<R>[] = [
   {
     id: "indexVariant.id",
     label: "Lead Variant",
-    // comparator: generateComparator(d => d.indexVariant.id),
+    comparator: getComparator(d => d.indexVariant.id),
     renderCell: d => (
       <Link to={`/variant/${d.indexVariant.id}`}>{d.indexVariant.id}</Link>
     ),
