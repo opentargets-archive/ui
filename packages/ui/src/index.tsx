@@ -15,3 +15,5 @@ export { default as Link } from "./components/Link";
 
 export { default as FontAwesomeLoader } from "./components/FontAwesomeLoader";
 export { default as theme } from "./theme";
+
+export { default as getComparator } from "./utils/getComparator";
