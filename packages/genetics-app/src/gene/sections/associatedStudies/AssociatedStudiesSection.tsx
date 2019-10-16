@@ -39,6 +39,10 @@ const columns: TableClientSideColumn<R>[] = [
     label: "Trait",
     comparator: getComparator(d => d.study.traitReported),
     renderCell: d => d.study.traitReported,
+    filter: {
+      valueAccessor: d => d.study.traitReported,
+      labelAccessor: d => d.study.traitReported,
+    },
     // renderFilter: () => (
     //   <Autocomplete
     //     options={traitFilterOptions}

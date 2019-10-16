@@ -9,16 +9,28 @@ import {
 } from "@material-ui/core";
 import { Help } from "@material-ui/icons";
 
-import { SortBy } from "../hooks/useClientSideSorting";
+import { isFilterableColumn } from "../hooks/useClientSideFiltering";
+import TableClientSideFilter from "./TableClientSideFilter";
 
 export type TableHeadColumn = {
   id: string;
   label: string;
+  tooltip?: React.ReactElement;
+
+  // sorting
   isSortable?: boolean;
   active?: boolean;
   direction?: "asc" | "desc";
   handleColumnClick?: () => void;
-  tooltip?: React.ReactElement;
+
+  // filtering
+  isFilterable?: boolean;
+  handleFilterChange?: (value: string[]) => void;
+  filterOptions?: {
+    label: React.ReactElement | string;
+    value: string;
+    selected: boolean;
+  }[];
 };
 
 // type ColumnGroup = {
@@ -27,18 +39,15 @@ export type TableHeadColumn = {
 //   colspan: number;
 // };
 
-// type ColumnFilter = {};
-
 export type TableHeadProps = {
   // columnGroups?: ColumnGroup[];
   columns: TableHeadColumn[];
-  // columnFilters?: ColumnFilter[];
-  sortBy?: SortBy;
 };
 
 const TableHead: React.FC<TableHeadProps> = ({ columns }) => (
   <MuiTableHead>
     {/* TODO: add columnGroups rendering */}
+    {/* column labels */}
     <TableRow>
       {columns.map((column, columnIndex) => (
         <TableCell key={columnIndex}>
@@ -68,7 +77,23 @@ const TableHead: React.FC<TableHeadProps> = ({ columns }) => (
         </TableCell>
       ))}
     </TableRow>
-    {/* TODO: add columnFilters rendering */}
+    {/* filters */}
+    {columns.some(isFilterableColumn) ? (
+      <TableRow>
+        {columns.map((column, columnIndex) => (
+          <TableCell key={columnIndex}>
+            {column.isFilterable &&
+            column.handleFilterChange &&
+            column.filterOptions ? (
+              <TableClientSideFilter
+                onFilterChange={column.handleFilterChange}
+                filterOptions={column.filterOptions}
+              />
+            ) : null}
+          </TableCell>
+        ))}
+      </TableRow>
+    ) : null}
   </MuiTableHead>
 );
 

@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import { TableHeadColumn } from "../components/TableHead";
-import { TableBodyColumn } from "../components/TableBody";
+import { TableClientSideColumnMaybeFilterable } from "./useClientSideFiltering";
 
 export type RowComparator<R extends {}> = (a: R, b: R) => number;
 
@@ -10,13 +9,14 @@ export type TableColumnSortable<R extends {}> = {
   comparator: RowComparator<R>;
 };
 
-export interface SortBy {
+export type SortBy = {
   columnId: string;
   direction: "asc" | "desc";
-}
+};
 
-export type TableClientSideColumnUnsortable<R extends {}> = TableBodyColumn<R> &
-  TableHeadColumn;
+export type TableClientSideColumnUnsortable<
+  R extends {}
+> = TableClientSideColumnMaybeFilterable<R>;
 
 export type TableClientSideColumnSortable<
   R extends {}
@@ -45,7 +45,7 @@ const useClientSideSorting = <R extends {}>(
 
   const sortableColumns = columns.filter(isSortableColumn);
 
-  let sortedRows, column;
+  let sortedRows: R[], column;
   if (
     sortBy &&
     (column = sortableColumns.find(c => c.id === sortBy.columnId))
