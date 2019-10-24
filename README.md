@@ -12,6 +12,12 @@ Contents:
 
 ## Usage
 
+**Important:** This is a monorepo containing several subprojects, managed by [lerna](https://github.com/lerna/lerna). **Do not use relative code imports between subprojects** (ie. `ui` and `*-app`). The correct way to import the `Section` component from `ui` within `platform-app`, for example, would be as follows.
+
+```
+import { Section } from "ui";
+```
+
 ### Development
 
 To start development, run:
