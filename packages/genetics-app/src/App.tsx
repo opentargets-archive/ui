@@ -15,6 +15,7 @@ import {
   SearchInput,
   FontAwesomeLoader,
   theme,
+  HeaderMenu,
 } from "ui";
 
 import HomePage from "./home/Page";
@@ -27,6 +28,35 @@ const client = new ApolloClient({
   }),
   cache: new InMemoryCache(),
 });
+
+const headerMenuItems = [
+  {
+    name: "Open Targets Consortium",
+    url: "https:/www.targetvalidation.org",
+    external: true,
+  },
+  {
+    name: "Documentation and FAQs",
+    url: "https://genetics-docs.opentargets.org/",
+    external: true,
+  },
+  {
+    name: "GraphQL API",
+    url: `${process.env.REACT_APP_GENETICS_API_URL}/browser`,
+    external: true,
+  },
+  {
+    name: "Downloads",
+    url:
+      "https://genetics-docs.opentargets.org/technical-pipeline/data-download",
+    external: true,
+  },
+  {
+    name: "Contact us",
+    url: "mailto:geneticsportal@opentargets.org",
+    external: true,
+  },
+];
 
 const App: React.FC = () => (
   <ApolloProvider client={client}>
@@ -46,7 +76,11 @@ const App: React.FC = () => (
             {/* all other pages show header/footer */}
             <Page
               header={
-                <Header platformName="Genetics" search={<SearchInput />} />
+                <Header
+                  platformName="Genetics"
+                  search={<SearchInput />}
+                  menu={<HeaderMenu items={headerMenuItems} />}
+                />
               }
               footer={<Footer version="0.0.0" />}
             >

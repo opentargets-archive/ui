@@ -53,6 +53,12 @@ const theme: ThemeOptions = {
     MuiLink: {
       underline: "none",
     },
+    MuiPopover: {
+      elevation: 0,
+    },
+    MuiMenuItem: {
+      dense: true,
+    },
   },
   overrides: {
     //   MuiButton: {
@@ -66,6 +72,14 @@ const theme: ThemeOptions = {
     //       textTransform: 'none',
     //     },
     //   },
+    MuiMenu: {
+      paper: {
+        border: `1px solid ${grey[300]}`,
+      },
+      list: {
+        padding: 0,
+      },
+    },
     MuiCard: {
       root: {
         border: `1px solid ${grey[300]}`,
