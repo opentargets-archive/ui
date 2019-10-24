@@ -11,8 +11,8 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ platformName, search, menu }) => (
-  <AppBar position="static" color="primary" elevation={0}>
-    <Toolbar variant="dense">
+  <AppBar>
+    <Toolbar>
       <Box flexGrow={1} flexDirection="row">
         <Link to="/" color="inherit">
           <Box display="flex" alignItems="center">

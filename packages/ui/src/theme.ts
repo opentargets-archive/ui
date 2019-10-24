@@ -33,6 +33,14 @@ const theme: ThemeOptions = {
   // sectionPadding: '8px',
   // widgetHeight: '250px',
   props: {
+    MuiAppBar: {
+      position: "static",
+      color: "primary",
+      elevation: 0,
+    },
+    MuiToolbar: {
+      variant: "dense",
+    },
     MuiButtonBase: {
       disableRipple: true,
     },
