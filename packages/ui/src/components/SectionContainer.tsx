@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Grid } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import { SectionProps } from "./Section";
 
 type Props = {
@@ -9,13 +9,15 @@ type Props = {
 };
 
 const SectionContainer: React.FC<Props> = ({ children }) => (
-  <Grid container spacing={2}>
-    {children.map((child, i) => (
-      <Grid key={i} item xs={12}>
-        {child}
-      </Grid>
-    ))}
-  </Grid>
+  <Box m={2}>
+    <Grid container spacing={2}>
+      {children.map((child, i) => (
+        <Grid key={i} item xs={12}>
+          {child}
+        </Grid>
+      ))}
+    </Grid>
+  </Box>
 );
 
 export default SectionContainer;
