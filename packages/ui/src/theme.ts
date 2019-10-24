@@ -33,6 +33,9 @@ const theme: ThemeOptions = {
   // sectionPadding: '8px',
   // widgetHeight: '250px',
   props: {
+    MuiButtonBase: {
+      disableRipple: true,
+    },
     //   MuiTab: {
     //     disableRipple: true,
     //   },
