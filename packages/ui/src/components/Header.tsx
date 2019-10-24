@@ -1,5 +1,7 @@
 import * as React from "react";
-import { AppBar, Toolbar, Box, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Box, Typography, Hidden } from "@material-ui/core";
+
+import OpenTargetsIcon from "../icons/OpenTargets";
 
 type Props = {
   platformName: string;
@@ -10,12 +12,17 @@ type Props = {
 const Header: React.FC<Props> = ({ platformName, search, menu }) => (
   <AppBar position="static" color="primary" elevation={0}>
     <Toolbar variant="dense">
-      <Box flexGrow={1}>
-        <Typography variant="h6" color="inherit">
-          Open Targets {platformName}
-        </Typography>
+      <Box flexGrow={1} flexDirection="row">
+        <Box display="flex" alignItems="center">
+          <Box mr={1}>
+            <OpenTargetsIcon />
+          </Box>
+          <Typography variant="h6" color="inherit">
+            Open Targets {platformName}
+          </Typography>
+        </Box>
       </Box>
-      {search ? search : null}
+      {search ? <Hidden xsDown>{search}</Hidden> : null}
       {menu ? menu : null}
     </Toolbar>
   </AppBar>
