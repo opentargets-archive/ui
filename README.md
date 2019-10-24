@@ -1,6 +1,8 @@
 # UI
 
-A monorepo containing Open Targets UI apps and common components.
+A monorepo containing Open Targets UI apps and common components. **Not currently in production.**
+
+The aim of using the monorepo is to more easily keep common components up to date and in usage across the apps. The repo also uses TypeScript.
 
 Contents:
 
