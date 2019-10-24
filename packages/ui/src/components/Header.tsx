@@ -18,7 +18,8 @@ const Header: React.FC<Props> = ({ platformName, search, menu }) => (
             <OpenTargetsIcon />
           </Box>
           <Typography variant="h6" color="inherit">
-            Open Targets {platformName}
+            <span style={{ fontWeight: 1100 }}>Open Targets</span>{" "}
+            <span style={{ fontWeight: 300 }}>{platformName}</span>
           </Typography>
         </Box>
       </Box>
