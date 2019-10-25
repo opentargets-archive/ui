@@ -3,6 +3,7 @@ import "typeface-inter";
 
 export { default as ExampleComponent } from "./components/ExampleComponent";
 export { default as Page } from "./components/Page";
+export { default as Home } from "./components/Home";
 export { default as Header } from "./components/Header";
 export { default as HeaderMenu } from "./components/HeaderMenu";
 export { default as Footer } from "./components/Footer";
