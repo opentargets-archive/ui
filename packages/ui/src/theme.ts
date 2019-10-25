@@ -83,6 +83,11 @@ const theme: ThemeOptions = {
     //       textTransform: 'none',
     //     },
     //   },
+    MuiAvatar: {
+      colorDefault: {
+        backgroundColor: PRIMARY,
+      },
+    },
     MuiMenu: {
       paper: {
         border: `1px solid ${grey[300]}`,
