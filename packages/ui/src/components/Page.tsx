@@ -21,7 +21,7 @@ const Page: React.FC<Props> = ({ header, footer, children }) => (
         {header}
       </Grid>
     ) : null}
-    <Grid item xs={12}>
+    <Grid item xs={12} style={{ flex: 1 }}>
       {children}
     </Grid>
     {footer ? (
