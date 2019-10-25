@@ -41,7 +41,7 @@ const App: React.FC = () => (
           <Switch>
             {/* home is special, as no header/footer is shown */}
             <Route exact path="/">
-              <Page>
+              <Page footer={<Footer sections={footerSections} />}>
                 <HomePage />
               </Page>
             </Route>

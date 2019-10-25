@@ -1,5 +1,10 @@
 import React from "react";
+import { Home, HeaderMenu } from "ui";
 
-const HomePage: React.FC = () => <div>Home!</div>;
+import { headerMenuItems } from "../configuration";
+
+const HomePage: React.FC = () => (
+  <Home menu={<HeaderMenu items={headerMenuItems} />}>Platform Home</Home>
+);
 
 export default HomePage;
