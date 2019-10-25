@@ -22,41 +22,14 @@ import HomePage from "./home/Page";
 import GenePage from "./gene/Page";
 import DiseasePage from "./disease/Page";
 
+import { headerMenuItems, footerSections } from "./configuration";
+
 const client = new ApolloClient({
   link: new HttpLink({
     uri: process.env.REACT_APP_GENETICS_API_URL,
   }),
   cache: new InMemoryCache(),
 });
-
-const headerMenuItems = [
-  {
-    name: "Open Targets Consortium",
-    url: "https:/www.targetvalidation.org",
-    external: true,
-  },
-  {
-    name: "Documentation and FAQs",
-    url: "https://genetics-docs.opentargets.org/",
-    external: true,
-  },
-  {
-    name: "GraphQL API",
-    url: `${process.env.REACT_APP_GENETICS_API_URL}/browser`,
-    external: true,
-  },
-  {
-    name: "Downloads",
-    url:
-      "https://genetics-docs.opentargets.org/technical-pipeline/data-download",
-    external: true,
-  },
-  {
-    name: "Contact us",
-    url: "mailto:geneticsportal@opentargets.org",
-    external: true,
-  },
-];
 
 const App: React.FC = () => (
   <ApolloProvider client={client}>
@@ -82,7 +55,7 @@ const App: React.FC = () => (
                   menu={<HeaderMenu items={headerMenuItems} />}
                 />
               }
-              footer={<Footer version="0.0.0" />}
+              footer={<Footer sections={footerSections} />}
             >
               <Route path="/gene/:ensgId">
                 <GenePage />
