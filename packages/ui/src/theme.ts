@@ -96,16 +96,26 @@ const theme: ThemeOptions = {
         border: `1px solid ${grey[300]}`,
       },
     },
+    MuiCardHeader: {
+      root: {
+        padding: `${SPACING}px`,
+        borderBottom: `1px solid ${grey[300]}`,
+      },
+    },
+    MuiCardContent: {
+      root: {
+        padding: 0,
+        "&:last-child": {
+          paddingBottom: 0,
+        },
+      },
+    },
     MuiChip: {
       root: {
         margin: `${SPACING / 4}px`,
       },
     },
-    MuiCardHeader: {
-      root: {
-        borderBottom: `1px solid ${grey[300]}`,
-      },
-    },
+
     // MuiIconButton: {
     //   root: {
     //     width: "32px",
