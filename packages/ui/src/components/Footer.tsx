@@ -1,18 +1,23 @@
 import * as React from "react";
-import { Box, Grid, Typography } from "@material-ui/core";
+
+import FooterSectionContainer from "./FooterSectionContainer";
+import FooterSection from "./FooterSection";
+import FooterSectionLink, { FooterSectionLinkProps } from "./FooterSectionLink";
 
 type Props = {
-  version: string;
+  sections: { title: string; items: (FooterSectionLinkProps)[] }[];
 };
 
-const Footer: React.FC<Props> = ({ version }) => (
-  <Box m={0} p={3}>
-    <Grid container spacing={3} justify="center">
-      <Grid item xs={12}>
-        <Typography>Version {version}</Typography>
-      </Grid>
-    </Grid>
-  </Box>
+const Footer: React.FC<Props> = ({ sections }) => (
+  <FooterSectionContainer>
+    {sections.map((section, i) => (
+      <FooterSection key={i} title={section.title}>
+        {section.items.map((item, j) => (
+          <FooterSectionLink key={j} url={item.url} label={item.label} />
+        ))}
+      </FooterSection>
+    ))}
+  </FooterSectionContainer>
 );
 
 export default Footer;
