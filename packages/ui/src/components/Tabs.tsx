@@ -24,7 +24,11 @@ const Tabs: React.FC<TabsProps> = ({ defaultTabId, tabs }) => {
           <MuiTab key={tab.id} value={tab.id} label={tab.label} />
         ))}
       </MuiTabs>
-      {tabs.map(tab => (tab.id === tabId ? tab.node : null))}
+      {tabs.map(tab =>
+        tab.id === tabId ? (
+          <React.Fragment key={tab.id}>{tab.node}</React.Fragment>
+        ) : null
+      )}
     </React.Fragment>
   );
 };
