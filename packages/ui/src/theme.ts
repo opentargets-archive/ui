@@ -140,7 +140,7 @@ const theme: ThemeOptions = {
     },
     MuiTabs: {
       root: {
-        borderBottom: "1px solid #616161",
+        borderBottom: `1px solid ${grey[500]}`,
       },
       indicator: {
         display: "none",
