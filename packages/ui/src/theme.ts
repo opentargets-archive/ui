@@ -138,26 +138,26 @@ const theme: ThemeOptions = {
         minHeight: "36px",
       },
     },
-    //   MuiTabs: {
-    //     root: {
-    //       borderBottom: '1px solid #616161',
-    //     },
-    //     indicator: {
-    //       display: 'none',
-    //     },
-    //   },
-    //   MuiTab: {
-    //     root: {
-    //       textTransform: 'none',
-    //       minWidth: '10px !important',
-    //       '&$selected': {
-    //         backgroundColor: PRIMARY,
-    //         color: 'white',
-    //         '&:hover': { backgroundColor: PRIMARY },
-    //       },
-    //       '&:hover': { backgroundColor: lighten(0.3, PRIMARY) },
-    //     },
-    //   },
+    MuiTabs: {
+      root: {
+        borderBottom: "1px solid #616161",
+      },
+      indicator: {
+        display: "none",
+      },
+    },
+    MuiTab: {
+      root: {
+        textTransform: "none",
+        minWidth: "10px !important",
+        "&$selected": {
+          backgroundColor: PRIMARY,
+          color: "white",
+          "&:hover": { backgroundColor: PRIMARY },
+        },
+        // "&:hover": { backgroundColor: lighten(0.3, PRIMARY) },
+      },
+    },
     //   MuiExpansionPanelSummary: {
     //     root: {
     //       padding: 0,
