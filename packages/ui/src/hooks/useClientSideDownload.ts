@@ -2,19 +2,18 @@ import { saveAs } from "file-saver";
 
 const quoteIfString = (d: any) => (typeof d === "string" ? `"${d}"` : d);
 
-// const asJSONString = <R extends {}>(
-//   rows: R[],
-//   columns: TableDownloadColumn<R>[]
-// ) => {
-//   const rowToJSONObject = columns.reduce((acc, column) => column);
-//   const rowsArray = rows.map(row => {
-
-//   })
-
-//   // use the full headerMap which contain optional export() function for each header
-//   const rowsHeadersOnly = rows.map(row => pick(row, headerMap));
-//   return JSON.stringify(rowsHeadersOnly);
-// };
+const asJSONContentString = <R extends {}>(
+  rows: R[],
+  columns: TableDownloadColumn<R>[]
+) => {
+  const rowsAsObjectsArray = rows.map(row =>
+    columns.reduce((acc, column) => {
+      acc[column.label] = column.valueAccessor(row);
+      return acc;
+    }, {})
+  );
+  return JSON.stringify(rowsAsObjectsArray);
+};
 
 const asCSVContentString = <R extends {}>(
   rows: R[],
@@ -53,6 +52,7 @@ const formatToMimeType = {
 };
 
 const formatToContentStringGenerator = {
+  json: asJSONContentString,
   csv: asCSVContentString,
   tsv: asTSVContentString,
 };
@@ -60,7 +60,7 @@ const formatToContentStringGenerator = {
 const download = <R extends {}>(
   rows: R[],
   columns: TableDownloadColumn<R>[],
-  format: "csv" | "tsv",
+  format: "json" | "csv" | "tsv",
   filenameStem: string
 ) => {
   const mimeType = formatToMimeType[format];
@@ -89,7 +89,10 @@ const useClientSideDownload = <R extends {}>(
   const downloadAsTSV = () => {
     download(rows, columns, "tsv", filenameStem);
   };
-  return { disabled, downloadAsCSV, downloadAsTSV };
+  const downloadAsJSON = () => {
+    download(rows, columns, "json", filenameStem);
+  };
+  return { disabled, downloadAsCSV, downloadAsTSV, downloadAsJSON };
 };
 
 export default useClientSideDownload;

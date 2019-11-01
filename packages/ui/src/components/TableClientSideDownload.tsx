@@ -5,11 +5,12 @@ export type TableClientSideDownloadActionsProps = {
   disabled: boolean;
   downloadAsCSV: () => void;
   downloadAsTSV: () => void;
+  downloadAsJSON: () => void;
 };
 
 const TableClientSideDownloadActions: React.FC<
   TableClientSideDownloadActionsProps
-> = ({ disabled, downloadAsCSV, downloadAsTSV }) => {
+> = ({ disabled, downloadAsCSV, downloadAsTSV, downloadAsJSON }) => {
   return (
     <React.Fragment>
       <Button
@@ -25,6 +26,13 @@ const TableClientSideDownloadActions: React.FC<
         aria-label="Download as TSV"
       >
         TSV
+      </Button>
+      <Button
+        onClick={downloadAsJSON}
+        disabled={disabled}
+        aria-label="Download as JSON"
+      >
+        JSON
       </Button>
     </React.Fragment>
   );
