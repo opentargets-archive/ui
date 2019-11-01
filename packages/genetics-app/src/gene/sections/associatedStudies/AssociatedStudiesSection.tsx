@@ -5,6 +5,7 @@ import { loader } from "graphql.macro";
 import {
   TableClientSide,
   TableClientSideColumn,
+  TableDownloadColumn,
   Link,
   getComparator,
   getArrayElementType,
@@ -175,6 +176,11 @@ const columns: TableClientSideColumn<R>[] = [
   //   },
 ];
 
+const downloadColumns: TableDownloadColumn<R>[] = [
+  { label: "Study ID", valueAccessor: d => d.study.studyId },
+  { label: "Trait", valueAccessor: d => d.study.traitReported },
+];
+
 const AssociatedStudiesSection: React.FC<Props> = ({ geneId }) => {
   const { loading, error, data } = useQuery<
     GenePageAssociatedStudiesQueryQuery,
@@ -184,7 +190,13 @@ const AssociatedStudiesSection: React.FC<Props> = ({ geneId }) => {
   const rows =
     error || loading || !data ? [] : data.studiesAndLeadVariantsForGene;
 
-  return <TableClientSide {...{ columns, rows }} />;
+  const downloadFilestem = `associated-studies-${geneId}`;
+
+  return (
+    <TableClientSide
+      {...{ rows, columns, downloadColumns, downloadFilestem }}
+    />
+  );
 };
 
 export default AssociatedStudiesSection;

@@ -5,6 +5,7 @@ import { loader } from "graphql.macro";
 import {
   TableClientSide,
   TableClientSideColumn,
+  TableDownloadColumn,
   Link,
   getComparator,
   getArrayElementType,
@@ -110,6 +111,11 @@ const columns: TableClientSideColumn<R>[] = [
   //   },
 ];
 
+const downloadColumns: TableDownloadColumn<R>[] = [
+  { label: "Study ID", valueAccessor: d => d.study.studyId },
+  { label: "Trait", valueAccessor: d => d.study.traitReported },
+];
+
 const ColocalisingStudiesSection: React.FC<Props> = ({ geneId }) => {
   const { loading, error, data } = useQuery<
     GenePageColocalisingStudiesQueryQuery,
@@ -118,7 +124,13 @@ const ColocalisingStudiesSection: React.FC<Props> = ({ geneId }) => {
 
   const rows = error || loading || !data ? [] : data.colocalisationsForGene;
 
-  return <TableClientSide {...{ columns, rows }} />;
+  const downloadFilestem = `colocalising-studies-${geneId}`;
+
+  return (
+    <TableClientSide
+      {...{ rows, columns, downloadColumns, downloadFilestem }}
+    />
+  );
 };
 
 export default ColocalisingStudiesSection;

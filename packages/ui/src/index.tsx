@@ -24,3 +24,4 @@ export { default as getComparator } from "./utils/getComparator";
 export { getArrayElementType } from "./utils/getArrayElementType";
 
 export { TableClientSideColumn } from "./hooks/useClientSideSorting";
+export { TableDownloadColumn } from "./hooks/useClientSideDownload";
