@@ -57,19 +57,16 @@ const formatToContentStringGenerator = {
   tsv: asTSVContentString,
 };
 
-const download = <R extends {}>(
-  rows: R[],
-  columns: TableDownloadColumn<R>[],
-  format: "json" | "csv" | "tsv",
-  filenameStem: string
+const download = (
+  contentString: string,
+  mimeType: string,
+  filenameStem: string,
+  filenameExtension: string
 ) => {
-  const mimeType = formatToMimeType[format];
-  const asContentString = formatToContentStringGenerator[format];
-  const contentString = asContentString(rows, columns);
   const blob = new Blob([contentString], {
     type: mimeType,
   });
-  saveAs(blob, `${filenameStem}.${format}`);
+  saveAs(blob, `${filenameStem}.${filenameExtension}`);
 };
 
 export type TableDownloadColumn<R extends {}> = {
@@ -83,15 +80,27 @@ const useClientSideDownload = <R extends {}>(
   filenameStem: string
 ) => {
   const disabled = rows.length === 0 || columns.length === 0;
-  const downloadAsCSV = () => {
-    download(rows, columns, "csv", filenameStem);
-  };
-  const downloadAsTSV = () => {
-    download(rows, columns, "tsv", filenameStem);
-  };
-  const downloadAsJSON = () => {
-    download(rows, columns, "json", filenameStem);
-  };
+  const downloadAsCSV = () =>
+    download(
+      formatToContentStringGenerator.csv(rows, columns),
+      formatToMimeType.csv,
+      filenameStem,
+      "csv"
+    );
+  const downloadAsTSV = () =>
+    download(
+      formatToContentStringGenerator.tsv(rows, columns),
+      formatToMimeType.tsv,
+      filenameStem,
+      "tsv"
+    );
+  const downloadAsJSON = () =>
+    download(
+      formatToContentStringGenerator.json(rows, columns),
+      formatToMimeType.json,
+      filenameStem,
+      "json"
+    );
   return { disabled, downloadAsCSV, downloadAsTSV, downloadAsJSON };
 };
 
