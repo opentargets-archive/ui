@@ -141,6 +141,7 @@ const theme: ThemeOptions = {
     MuiTabs: {
       root: {
         borderBottom: `1px solid ${grey[500]}`,
+        minHeight: "10px",
       },
       indicator: {
         display: "none",
@@ -150,6 +151,7 @@ const theme: ThemeOptions = {
       root: {
         textTransform: "none",
         minWidth: "10px !important",
+        minHeight: "10px",
         "&$selected": {
           backgroundColor: PRIMARY,
           color: "white",
