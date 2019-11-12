@@ -1,7 +1,9 @@
 import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
-import { Grid, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
+
+import { SectionContainer } from "ui";
 
 import Facets from "./Facets";
 import Table from "./Table";
@@ -37,21 +39,24 @@ const ClassicAssociationsManager: React.FC<Props> = ({ efoId }) => {
   const totalCount = 42;
   const name = "SOME DISEASE";
   console.log(loading, error, data);
+
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Typography variant="h6">
-          <strong>{totalCount} targets</strong> associated with{" "}
-          <strong>{name}</strong>
-        </Typography>
+    <Box p={2}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography variant="h6">
+            <strong>{totalCount} targets</strong> associated with{" "}
+            <strong>{name}</strong>
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <Facets />
+        </Grid>
+        <Grid item xs={12} md={9}>
+          <Table />
+        </Grid>
       </Grid>
-      <Grid item xs={12} md={3}>
-        <Facets />
-      </Grid>
-      <Grid item xs={12} md={9}>
-        <Table />
-      </Grid>
-    </Grid>
+    </Box>
   );
 };
 
