@@ -1038,17 +1038,6 @@ export type PageInfo = {
   hasNextPage: Scalars['Boolean'],
 };
 
-export type Pdb = {
-   __typename?: 'Pdb',
-  pdbId: Scalars['String'],
-  chain?: Maybe<Scalars['String']>,
-  start: Scalars['Int'],
-  end: Scalars['Int'],
-  coverage: Scalars['Float'],
-  resolution?: Maybe<Scalars['Float']>,
-  method: Scalars['String'],
-};
-
 export type Phenotype = {
    __typename?: 'Phenotype',
   id: Scalars['String'],
@@ -1311,13 +1300,9 @@ export type TargetDetailPathways = {
 export type TargetDetailProtein = {
    __typename?: 'TargetDetailProtein',
   uniprotId?: Maybe<Scalars['String']>,
-  pdbId?: Maybe<Scalars['String']>,
-  pdbs: Array<Pdb>,
   keywords?: Maybe<Array<UniprotKeyword>>,
   subCellularLocations?: Maybe<Array<UniprotSubCellularLocation>>,
   subUnit?: Maybe<Array<Scalars['String']>>,
-  structuralFeatures: Array<UniprotStructuralFeature>,
-  sequenceLength?: Maybe<Scalars['Int']>,
 };
 
 export type TargetDetailProteinInteractions = {
@@ -1511,8 +1496,6 @@ export type TargetSummaryPathways = {
 
 export type TargetSummaryProtein = {
    __typename?: 'TargetSummaryProtein',
-  hasSequenceAnnotationVisualisation: Scalars['Boolean'],
-  hasProteinStructure: Scalars['Boolean'],
   hasSubCellularLocation: Scalars['Boolean'],
   hasSubUnitData: Scalars['Boolean'],
   hasUniprotKeywords: Scalars['Boolean'],
@@ -1581,13 +1564,6 @@ export type UniprotKeyword = {
   id: Scalars['String'],
   name: Scalars['String'],
   category: Scalars['String'],
-};
-
-export type UniprotStructuralFeature = {
-   __typename?: 'UniprotStructuralFeature',
-  type: Scalars['String'],
-  start: Scalars['Int'],
-  end: Scalars['Int'],
 };
 
 export type UniprotSubCellularLocation = {
@@ -1659,6 +1635,68 @@ export type WithdrawnNotice = {
   year: Scalars['String'],
 };
 
+export type DiseaseAssociationsQueryVariables = {
+  efoId: Scalars['String'],
+  first?: Maybe<Scalars['Int']>,
+  after?: Maybe<Scalars['String']>,
+  facets?: Maybe<DiseaseTargetsConnectionFacetsInput>,
+  sortBy?: Maybe<DiseaseTargetsConnectionSortByInput>,
+  search?: Maybe<Scalars['String']>
+};
+
+
+export type DiseaseAssociationsQuery = (
+  { __typename?: 'Query' }
+  & { disease: (
+    { __typename?: 'Disease' }
+    & Pick<Disease, 'id'>
+    & { targetsConnection: (
+      { __typename?: 'DiseaseTargetsConnection' }
+      & Pick<DiseaseTargetsConnection, 'totalCount'>
+      & { pageInfo: (
+        { __typename?: 'PageInfo' }
+        & Pick<PageInfo, 'nextCursor' | 'hasNextPage'>
+      ), edges: Array<(
+        { __typename?: 'DiseaseTargetsConnectionEdge' }
+        & Pick<DiseaseTargetsConnectionEdge, 'score'>
+        & { node: (
+          { __typename?: 'Target' }
+          & Pick<Target, 'id' | 'symbol' | 'name'>
+          & { details: (
+            { __typename?: 'TargetDetails' }
+            & { tractability: Maybe<(
+              { __typename?: 'TargetDetailTractability' }
+              & { smallMolecule: Array<(
+                { __typename?: 'TractabilityAssessmentBucket' }
+                & Pick<TractabilityAssessmentBucket, 'chemblBucket' | 'description' | 'value'>
+              )>, antibody: Array<(
+                { __typename?: 'TractabilityAssessmentBucket' }
+                & Pick<TractabilityAssessmentBucket, 'chemblBucket' | 'description' | 'value'>
+              )> }
+            )> }
+          ) }
+        ), scoresByDataType: Array<(
+          { __typename?: 'ScoreForDataType' }
+          & Pick<ScoreForDataType, 'dataTypeId' | 'score'>
+        )> }
+      )> }
+    ) }
+  ) }
+);
+
+export type TargetProfileQueryQueryVariables = {
+  ensgId: Scalars['String']
+};
+
+
+export type TargetProfileQueryQuery = (
+  { __typename?: 'Query' }
+  & { target: (
+    { __typename?: 'Target' }
+    & Pick<Target, 'id' | 'name' | 'uniprotId' | 'symbol' | 'description' | 'synonyms'>
+  ) }
+);
+
 export type TargetQueryQueryVariables = {
   ensgId: Scalars['String']
 };
@@ -1673,6 +1711,94 @@ export type TargetQueryQuery = (
 );
 
 
+export const DiseaseAssociationsDocument = gql`
+    query DiseaseAssociations($efoId: String!, $first: Int, $after: String, $facets: DiseaseTargetsConnectionFacetsInput, $sortBy: DiseaseTargetsConnectionSortByInput, $search: String) {
+  disease(efoId: $efoId) {
+    id
+    targetsConnection(first: $first, after: $after, facets: $facets, sortBy: $sortBy, search: $search) {
+      totalCount
+      pageInfo {
+        nextCursor
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          symbol
+          name
+          details {
+            tractability {
+              smallMolecule {
+                chemblBucket
+                description
+                value
+              }
+              antibody {
+                chemblBucket
+                description
+                value
+              }
+            }
+          }
+        }
+        score
+        scoresByDataType {
+          dataTypeId
+          score
+        }
+      }
+    }
+  }
+}
+    `;
+export type DiseaseAssociationsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<DiseaseAssociationsQuery, DiseaseAssociationsQueryVariables>, 'query'> & ({ variables: DiseaseAssociationsQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const DiseaseAssociationsComponent = (props: DiseaseAssociationsComponentProps) => (
+      <ApolloReactComponents.Query<DiseaseAssociationsQuery, DiseaseAssociationsQueryVariables> query={DiseaseAssociationsDocument} {...props} />
+    );
+    
+export type DiseaseAssociationsProps<TChildProps = {}> = ApolloReactHoc.DataProps<DiseaseAssociationsQuery, DiseaseAssociationsQueryVariables> & TChildProps;
+export function withDiseaseAssociations<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  DiseaseAssociationsQuery,
+  DiseaseAssociationsQueryVariables,
+  DiseaseAssociationsProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, DiseaseAssociationsQuery, DiseaseAssociationsQueryVariables, DiseaseAssociationsProps<TChildProps>>(DiseaseAssociationsDocument, {
+      alias: 'diseaseAssociations',
+      ...operationOptions
+    });
+};
+export type DiseaseAssociationsQueryResult = ApolloReactCommon.QueryResult<DiseaseAssociationsQuery, DiseaseAssociationsQueryVariables>;
+export const TargetProfileQueryDocument = gql`
+    query TargetProfileQuery($ensgId: String!) {
+  target(ensgId: $ensgId) {
+    id
+    name
+    uniprotId
+    symbol
+    description
+    synonyms
+  }
+}
+    `;
+export type TargetProfileQueryComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<TargetProfileQueryQuery, TargetProfileQueryQueryVariables>, 'query'> & ({ variables: TargetProfileQueryQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const TargetProfileQueryComponent = (props: TargetProfileQueryComponentProps) => (
+      <ApolloReactComponents.Query<TargetProfileQueryQuery, TargetProfileQueryQueryVariables> query={TargetProfileQueryDocument} {...props} />
+    );
+    
+export type TargetProfileQueryProps<TChildProps = {}> = ApolloReactHoc.DataProps<TargetProfileQueryQuery, TargetProfileQueryQueryVariables> & TChildProps;
+export function withTargetProfileQuery<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  TargetProfileQueryQuery,
+  TargetProfileQueryQueryVariables,
+  TargetProfileQueryProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, TargetProfileQueryQuery, TargetProfileQueryQueryVariables, TargetProfileQueryProps<TChildProps>>(TargetProfileQueryDocument, {
+      alias: 'targetProfileQuery',
+      ...operationOptions
+    });
+};
+export type TargetProfileQueryQueryResult = ApolloReactCommon.QueryResult<TargetProfileQueryQuery, TargetProfileQueryQueryVariables>;
 export const TargetQueryDocument = gql`
     query TargetQuery($ensgId: String!) {
   target(ensgId: $ensgId) {

@@ -1,0 +1,51 @@
+query DiseaseAssociations(
+  $efoId: String!
+  $first: Int
+  $after: String
+  $facets: DiseaseTargetsConnectionFacetsInput
+  $sortBy: DiseaseTargetsConnectionSortByInput
+  $search: String
+) {
+  disease(efoId: $efoId) {
+    id
+    targetsConnection(
+      first: $first
+      after: $after
+      facets: $facets
+      sortBy: $sortBy
+      search: $search
+    ) {
+      totalCount
+      pageInfo {
+        nextCursor
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          symbol
+          name
+          # details {
+          #   tractability {
+          #     smallMolecule {
+          #       chemblBucket
+          #       description
+          #       value
+          #     }
+          #     antibody {
+          #       chemblBucket
+          #       description
+          #       value
+          #     }
+          #   }
+          # }
+        }
+        score
+        scoresByDataType {
+          dataTypeId
+          score
+        }
+      }
+    }
+  }
+}

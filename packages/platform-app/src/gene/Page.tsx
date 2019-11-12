@@ -9,11 +9,13 @@ import {
   GeneIcon,
 } from "ui";
 
+import ClassicAssociationsTable from "./ClassicAssociations/ClassicAssociationsTable";
+
 const tabs = [
   {
     id: "classic-associations",
     label: "Associations (classic)",
-    node: <div>Tab 1 Content</div>,
+    node: <ClassicAssociationsTable efoId="EFO_0000384" />,
   },
   {
     id: "dynamic-associations",
