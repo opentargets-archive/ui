@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { loader } from "graphql.macro";
 import { Box, Grid, Typography } from "@material-ui/core";
 
-import { SectionContainer } from "ui";
+import { SectionContainer, getComparator } from "ui";
 
 import Facets from "./Facets";
 import Table from "./Table";
@@ -14,6 +14,23 @@ import {
 } from "../../generated/platform-api-types";
 
 const QUERY = loader("./query.gql");
+const dataTypesOrder = [
+  "GENETIC_ASSOCIATION",
+  "SOMATIC_MUTATION",
+  "KNOWN_DRUGS",
+  "PATHWAYS",
+  "DIFFERENTIAL_EXPRESSION",
+  "TEXT_MINING",
+  "ANIMAL_MODELS",
+];
+const dataTypesPositions = dataTypesOrder.reduce(
+  (acc: { [key: string]: number }, d, i) => {
+    acc[d] = i;
+    return acc;
+  },
+  {}
+);
+console.log(dataTypesPositions);
 
 type Props = {
   efoId: string;
@@ -40,6 +57,18 @@ const ClassicAssociationsManager: React.FC<Props> = ({ efoId }) => {
   const name = "SOME DISEASE";
   console.log(loading, error, data);
 
+  const rows = data
+    ? data.disease.targetsConnection.edges.map(e => ({
+        ...e.node,
+        score: e.score,
+        scoresByDataType: e.scoresByDataType.sort(
+          getComparator(d => dataTypesPositions[d.dataTypeId])
+        ),
+      }))
+    : [];
+
+  console.log(rows);
+
   return (
     <Box p={2}>
       <Grid container spacing={2}>
@@ -53,7 +82,7 @@ const ClassicAssociationsManager: React.FC<Props> = ({ efoId }) => {
           <Facets />
         </Grid>
         <Grid item xs={12} md={9}>
-          <Table />
+          <Table rows={rows} dataTypes={dataTypesOrder} />
         </Grid>
       </Grid>
     </Box>
