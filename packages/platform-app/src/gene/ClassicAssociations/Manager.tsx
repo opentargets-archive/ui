@@ -53,10 +53,10 @@ const ClassicAssociationsManager: React.FC<Props> = ({ efoId }) => {
     DiseaseAssociationsQueryVariables
   >(QUERY, { variables: { efoId } });
 
-  const totalCount = 42;
   const name = "SOME DISEASE";
   console.log(loading, error, data);
 
+  const totalCount = data ? data.disease.targetsConnection.totalCount : "???";
   const rows = data
     ? data.disease.targetsConnection.edges.map(e => ({
         ...e.node,
